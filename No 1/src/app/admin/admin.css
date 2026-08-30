@@ -1,0 +1,62 @@
+.programs {
+  padding: 10px;
+}
+
+.section-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.programs h2 {
+  font-size: 32px;
+  margin: 12px 0 8px;
+  color: #172554;
+}
+
+.description {
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.program-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.program {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.program:hover {
+  background: #eff6ff;
+  transform: translateY(-2px);
+}
+
+.program > span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.program h3 {
+  font-size: 14px;
+  margin: 0 0 3px;
+  color: #1e293b;
+}
+
+.program p {
+  font-size: 12px;
+  margin: 0;
+  color: #94a3b8;
+}

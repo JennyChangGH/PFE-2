@@ -1,0 +1,154 @@
+.hero {
+  min-height: calc(100vh - 96px);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  padding: 70px 5%;
+
+  background-color: #fdfbf8;
+  overflow: hidden;
+}
+
+.hero-content {
+  padding-right: 50px;
+}
+
+.location {
+  color: #966b4e;
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+}
+
+.hero h2 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+  font-size: clamp(50px, 5vw, 78px);
+  line-height: 0.98;
+
+  color: #21150e;
+}
+
+.hero h2 span {
+  color: #875332;
+  font-style: italic;
+}
+
+.description {
+  max-width: 550px;
+
+  margin: 40px 0;
+
+  color: #806b5b;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-block;
+
+  padding: 18px 30px;
+
+  border-radius: 7px;
+
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background-color: #321d10;
+  color: white;
+}
+
+.secondary-btn {
+  border: 1px solid #d9cbbd;
+  color: #321d10;
+}
+
+.hero-image {
+  position: relative;
+  height: 650px;
+  padding: 30px;
+}
+
+.image-background {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 90%;
+  height: 90%;
+
+  background-color: #eee8de;
+  border-radius: 20px;
+}
+
+.hero-image img {
+  position: relative;
+
+  width: 90%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 20px;
+
+  display: block;
+  margin-left: auto;
+}
+
+.opening {
+  position: absolute;
+
+  bottom: 50px;
+  left: 10px;
+
+  background-color: #fff;
+
+  padding: 20px 25px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.opening span {
+  display: block;
+
+  font-size: 12px;
+  letter-spacing: 3px;
+
+  color: #8c6a51;
+
+  margin-bottom: 8px;
+}
+
+.opening strong {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  color: #321d10;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    padding-right: 0;
+  }
+
+  .hero-image {
+    margin-top: 50px;
+  }
+}

@@ -1,0 +1,48 @@
+.about {
+  padding: 10px;
+}
+
+.section-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.about h2 {
+  font-size: 32px;
+  margin: 12px 0 20px;
+  color: #172554;
+}
+
+.about p {
+  color: #5b6472;
+  line-height: 1.8;
+  font-size: 15px;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.about-highlight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.about-highlight div {
+  background: #f1f5f9;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.about-highlight strong {
+  display: block;
+  color: #172554;
+  margin-bottom: 5px;
+}
+
+.about-highlight span {
+  font-size: 14px;
+  color: #64748b;
+}

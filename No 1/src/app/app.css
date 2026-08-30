@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #1f2937;
+}
+
+header {
+  background-color: #14213d;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.header-content {
+  max-width: 900px;
+  margin: auto;
+}
+
+.university-label {
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin: 0 0 10px;
+  opacity: 0.8;
+}
+
+header h1 {
+  font-size: 38px;
+  margin: 0 0 10px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  padding: 40px 20px 25px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  min-height: 220px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section {
+  background-color: white;
+  margin: 0 20px 40px;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.contact-wrapper {
+  margin: 0 20px 40px;
+}
+
+footer {
+  background-color: #14213d;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 30px;
+  }
+}
