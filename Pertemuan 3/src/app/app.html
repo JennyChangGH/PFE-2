@@ -1,0 +1,152 @@
+<main class="container">
+  <h1>Angular 21 Directive Experiment</h1>
+  <section>
+    <h2>1. Percobaan NgClass</h2>
+    <p
+      [ngClass]="{
+        'status-active': isActive(),
+        'status-inactive': !isActive()
+      }"
+    >
+      Status:
+      {{ isActive() ? 'AKTIF' : 'TIDAK AKTIF' }}
+    </p>
+    <button (click)="toggleStatus()">
+      Toggle Status
+    </button>
+  </section>
+
+  <section>
+    <h2>2. Percobaan NgStyle</h2>
+    <p
+      [ngStyle]="{
+        'font-size.px': fontSize(),
+        'color': textColor()
+      }"
+    >
+      Ukuran font: {{ fontSize() }}px, Warna: {{ textColor() }}
+    </p>
+    <button (click)="increaseFont()">Perbesar Font</button>
+    <button (click)="decreaseFont()">Perkecil Font</button>
+    <button (click)="changeColor()">Ganti Warna</button>
+  </section>
+
+  <section>
+    <h2>3. Percobaan NgModel</h2>
+    <label for="nama">
+      Masukkan nama:
+    </label>
+    <br><br>
+    <input
+      id="nama"
+      type="text"
+      [ngModel]="nama()"
+      (ngModelChange)="nama.set($event)"
+      placeholder="Masukkan nama"
+    >
+    <h3>
+      Halo, {{ nama() || 'User' }}!
+    </h3>
+    <p>
+      Isi variabel nama: {{ nama() }}
+    </p>
+  </section>
+  
+  <section>
+    <h2>4. Directive Mandiri - appHighlight</h2>
+    <p>
+      Directive berikut akan memberikan warna highlight
+      ketika mouse diarahkan ke teks.
+    </p>
+    <div class="highlight-demo">
+      <p
+        class="highlight-text"
+        appHighlight
+        [color]="highlightColor()"
+      >
+        Arahkan mouse ke tulisan ini
+      </p>
+      <label for="highlightColor">
+        Pilih warna highlight:
+      </label>
+      <input
+        id="highlightColor"
+        type="color"
+        [value]="highlightColor()"
+        (input)="highlightColor.set(
+          $any($event.target).value
+        )"
+      >
+      <p class="color-value">
+        Warna yang dipilih:
+        {{ highlightColor() }}
+      </p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>5. Percobaan Pipe</h2>
+    <p>
+      Masukkan data berikut untuk melihat bagaimana Pipe
+      mengubah data sebelum ditampilkan.
+    </p>
+    <div class="pipe-input">
+      <label for="customerName">
+        Masukkan nama lengkap:
+      </label>
+      <input
+        id="customerName"
+        type="text"
+        [ngModel]="customerName()"
+        (ngModelChange)="customerName.set($event)"
+        placeholder="Contoh: mega jaya pratama"
+      >
+    </div>
+    <div class="pipe-input">
+      <label for="total">
+        Masukkan nominal:
+      </label>
+      <input
+        id="total"
+        type="number"
+        [ngModel]="total()"
+        (ngModelChange)="total.set($event)"
+        placeholder="Contoh: 1250000"
+      >
+    </div>
+    <div class="pipe-input">
+      <label for="tanggal">
+        Pilih tanggal:
+      </label>
+      <input
+        id="tanggal"
+        type="date"
+        [ngModel]="tanggal()"
+        (ngModelChange)="tanggal.set($event)"
+      >
+    </div>
+    <hr>
+    <h3>Hasil Built-in Pipe</h3>
+    <div class="pipe-result">
+      <span class="label">Nama asli</span>
+      <span class="value">{{ customerName() || '-' }}</span>
+    </div>
+    <div class="pipe-result">
+      <span class="label">Title Case</span>
+      <span class="value">{{ customerName() | titlecase }}</span>
+    </div>
+    <div class="pipe-result">
+      <span class="label">Currency</span>
+      <span class="value">{{ total() | currency:'IDR':'symbol':'1.0-0':'id-ID' }}</span>
+    </div>
+    <div class="pipe-result">
+      <span class="label">Date</span>
+      <span class="value">{{ tanggal() | date:'dd MMMM yyyy':'':'id-ID' }}</span>
+    </div>
+    <h3>Hasil Custom Pipe</h3>
+    <div class="pipe-result">
+      <span class="label">Inisial</span>
+      <span class="value">{{ customerName() | initials:3 }}</span>
+    </div>
+  </section>
+</main>
