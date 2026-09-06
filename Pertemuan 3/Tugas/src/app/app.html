@@ -1,0 +1,98 @@
+<div class="page">
+  <header class="page__header">
+    <h1>💰 Family Expense Tracker</h1>
+    <p>Catat pengeluaran harianmu dengan rapi.</p>
+  </header>
+
+  <section class="card">
+    <h2>Tambah Pengeluaran</h2>
+    <form class="expense-form" (ngSubmit)="addExpense()">
+      <div class="field">
+        <label for="title">Aktivitas</label>
+        <input
+          id="title"
+          type="text"
+          name="title"
+          placeholder="cth: Beli Kopi"
+          [(ngModel)]="title"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="category">Kategori</label>
+        <select id="category" name="category" [(ngModel)]="category">
+          @for (option of categoryOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="amount">Jumlah (Rp)</label>
+        <input
+          id="amount"
+          type="number"
+          name="amount"
+          min="0"
+          placeholder="0"
+          [(ngModel)]="amount"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-add">+ Tambah</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="summary">
+      <div class="summary__item summary__item--expense">
+        <span class="summary__label">Total Pengeluaran</span>
+        <span class="summary__value">{{ totalExpense() | rupiah }}</span>
+      </div>
+    </div>
+
+    <div class="card__header">
+      <h2>Riwayat Pengeluaran</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Aktivitas</th>
+            <th>Kategori</th>
+            <th>Jumlah</th>
+            <th aria-label="Aksi"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of expenses(); track item.id) {
+            <tr>
+              <td>{{ item.title }}</td>
+              <td>{{ item.category | category }}</td>
+              <td [appAmountColor]="item.amount" class="amount-cell">
+                {{ item.amount | rupiah }}
+              </td>
+              <td class="action-cell">
+                <button
+                  type="button"
+                  class="btn-delete"
+                  (click)="removeExpense(item.id)"
+                  aria-label="Hapus transaksi"
+                >
+                  🗑
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" class="empty-state">Belum ada data pengeluaran.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
