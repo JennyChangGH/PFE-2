@@ -1,0 +1,80 @@
+<section class="card">
+  <h2>Cross-Field Validation (Signal Forms)</h2>
+
+  <form (submit)="onSubmit(); $event.preventDefault()" novalidate>
+    <fieldset>
+      <legend>Jenis Akun</legend>
+      <label>
+        <input type="radio" value="personal" [formField]="registrationForm.accountType" />
+        Personal
+      </label>
+      <label>
+        <input type="radio" value="business" [formField]="registrationForm.accountType" />
+        Bisnis
+      </label>
+    </fieldset>
+
+    <label>
+      Nama Perusahaan
+      <input type="text" [formField]="registrationForm.companyName" />
+      @if (registrationForm.companyName().touched() && registrationForm.companyName().errors().length) {
+        <span class="errors">{{ registrationForm.companyName().errors()[0].message }}</span>
+      }
+    </label>
+
+    <label>
+      Tanggal Mulai
+      <input type="date" [formField]="registrationForm.startDate" />
+      @if (registrationForm.startDate().touched() && registrationForm.startDate().errors().length) {
+        <span class="errors">{{ registrationForm.startDate().errors()[0].message }}</span>
+      }
+    </label>
+
+    <label>
+      Tanggal Selesai
+      <input type="date" [formField]="registrationForm.endDate" />
+      @if (registrationForm.endDate().touched() && registrationForm.endDate().errors().length) {
+        <span class="errors">{{ registrationForm.endDate().errors()[0].message }}</span>
+      }
+    </label>
+
+    <label>
+      Password
+      <input type="password" [formField]="registrationForm.password" />
+      @if (registrationForm.password().touched() && registrationForm.password().errors().length) {
+        <span class="errors">{{ registrationForm.password().errors()[0].message }}</span>
+      }
+    </label>
+
+    <label>
+      Konfirmasi Password
+      <input type="password" [formField]="registrationForm.confirmPassword" />
+      @if (registrationForm.confirmPassword().touched() && registrationForm.confirmPassword().errors().length) {
+        <span class="errors">{{ registrationForm.confirmPassword().errors()[0].message }}</span>
+      }
+    </label>
+
+    <fieldset>
+      <legend>Kontak (isi salah satu)</legend>
+      <label>
+        Email
+        <input type="email" [formField]="registrationForm.contact.email" />
+      </label>
+      <label>
+        Telepon
+        <input type="tel" [formField]="registrationForm.contact.phone" />
+      </label>
+      @if (registrationForm.contact.email().touched() && registrationForm.contact.email().errors().length) {
+        <span class="errors">{{ registrationForm.contact.email().errors()[0].message }}</span>
+      }
+    </fieldset>
+
+    <button type="submit" [disabled]="registrationForm().invalid() || registrationForm().pending()">
+      Daftar
+    </button>
+  </form>
+
+  @if (successPayload()) {
+    <pre class="payload">{{ successPayload() }}</pre>
+  }
+</section>

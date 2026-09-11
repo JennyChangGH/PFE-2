@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f4f5f7;
+  color: #1f2430;
+}
+
+h1,
+h2,
+h3 {
+  color: #1f2430;
+}
+
+a {
+  color: #3f51b5;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  max-width: 640px;
+  margin: 1.5rem auto;
+}
+
+.hint {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+form input,
+form select,
+form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.6rem;
+  font: inherit;
+  border: 1px solid #c6cad3;
+  border-radius: 4px;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row > label {
+  flex: 1;
+}
+
+form fieldset {
+  border: 1px solid #c6cad3;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+form fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: normal;
+  margin-right: 1rem;
+}
+
+form fieldset input[type="radio"],
+form fieldset input[type="checkbox"] {
+  width: auto;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #d33;
+  background: #fff5f5;
+}
+
+input.ng-valid.ng-dirty,
+select.ng-valid.ng-dirty {
+  border-color: #2a2;
+}
+
+.errors {
+  display: block;
+  color: #d33;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-weight: normal;
+}
+
+.pending {
+  display: block;
+  color: #b8860b;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-weight: normal;
+}
+
+.success {
+  display: block;
+  color: #1e8e3e;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-weight: normal;
+}
+
+form button[type="submit"],
+form button[type="reset"] {
+  padding: 0.6rem 1.4rem;
+  background: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+  margin-right: 0.6rem;
+}
+
+form button[type="submit"]:disabled {
+  background: #b6bbcf;
+  cursor: not-allowed;
+}
+
+form button[type="reset"] {
+  background: #fff;
+  color: #3f51b5;
+  border: 1px solid #3f51b5;
+}
+
+.payload {
+  margin-top: 1rem;
+  background: #1f2430;
+  color: #d4ffd4;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}

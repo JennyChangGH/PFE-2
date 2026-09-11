@@ -1,0 +1,11 @@
+<form [formGroup]="form()" (ngSubmit)="onSubmit()" novalidate>
+  @for (question of sortedQuestions(); track question.key) {
+    <app-dynamic-form-question [question]="question" [form]="form()" />
+  }
+
+  <button type="submit" [disabled]="form().invalid">Simpan</button>
+</form>
+
+@if (payload()) {
+  <pre class="payload">{{ payload() }}</pre>
+}

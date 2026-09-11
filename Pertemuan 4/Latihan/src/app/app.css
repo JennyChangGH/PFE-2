@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #1f2430;
+  flex-wrap: wrap;
+}
+
+nav strong {
+  color: #fff;
+  margin-right: 1rem;
+}
+
+nav a {
+  color: #cfd3ef;
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+nav a.active {
+  background: #3f51b5;
+  color: #fff;
+}

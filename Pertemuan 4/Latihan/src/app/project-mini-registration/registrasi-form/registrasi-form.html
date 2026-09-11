@@ -1,0 +1,147 @@
+<section class="card wide">
+  <h2>Project Mini &mdash; Form Registrasi</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="grid">
+      <div class="col">
+        <label>
+          Nama Depan
+          <input formControlName="firstName" type="text" />
+          @if (form.controls.firstName.invalid && form.controls.firstName.touched) {
+            <span class="errors">Nama depan wajib diisi.</span>
+          }
+        </label>
+
+        <label>
+          Nama Belakang
+          <input formControlName="lastName" type="text" />
+          @if (form.controls.lastName.invalid && form.controls.lastName.touched) {
+            <span class="errors">Nama belakang wajib diisi.</span>
+          }
+        </label>
+
+        <label>
+          Email
+          <input formControlName="email" type="email" />
+          @if (form.controls.email.invalid && form.controls.email.touched) {
+            @if (form.controls.email.errors?.['required']) {
+              <span class="errors">Email wajib diisi.</span>
+            }
+            @if (form.controls.email.errors?.['email']) {
+              <span class="errors">Format email tidak valid.</span>
+            }
+          }
+        </label>
+
+        <label>
+          Alamat
+          <input formControlName="address" type="text" />
+          @if (form.controls.address.invalid && form.controls.address.touched) {
+            <span class="errors">Alamat wajib diisi.</span>
+          }
+        </label>
+
+        <div class="form-row">
+          <label>
+            RT
+            <input formControlName="rt" type="number" min="0" />
+            @if (form.controls.rt.invalid && form.controls.rt.touched) {
+              <span class="errors">RT wajib diisi.</span>
+            }
+          </label>
+          <label>
+            RW
+            <input formControlName="rw" type="number" min="0" />
+            @if (form.controls.rw.invalid && form.controls.rw.touched) {
+              <span class="errors">RW wajib diisi.</span>
+            }
+          </label>
+        </div>
+
+        <label>
+          Kecamatan
+          <select formControlName="kecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
+            @for (kec of kecamatanOptions; track kec) {
+              <option [value]="kec">{{ kec }}</option>
+            }
+          </select>
+          @if (form.controls.kecamatan.invalid && form.controls.kecamatan.touched) {
+            <span class="errors">Kecamatan wajib dipilih.</span>
+          }
+        </label>
+
+        <label>
+          Kelurahan
+          <select formControlName="kelurahan">
+            <option value="">-- Pilih Kelurahan --</option>
+            @for (kel of kelurahanOptions; track kel) {
+              <option [value]="kel">{{ kel }}</option>
+            }
+          </select>
+          @if (form.controls.kelurahan.invalid && form.controls.kelurahan.touched) {
+            <span class="errors">Kelurahan wajib dipilih.</span>
+          }
+        </label>
+
+        <fieldset>
+          <legend>Jenis Kelamin</legend>
+          <label>
+            <input formControlName="gender" type="radio" value="Laki-laki" />
+            Laki-laki
+          </label>
+          <label>
+            <input formControlName="gender" type="radio" value="Perempuan" />
+            Perempuan
+          </label>
+          @if (form.controls.gender.invalid && form.controls.gender.touched) {
+            <span class="errors">Pilih jenis kelamin.</span>
+          }
+        </fieldset>
+      </div>
+
+      <div class="col">
+        <label>
+          Password
+          <input formControlName="password" type="password" />
+          @if (form.controls.password.invalid && form.controls.password.touched) {
+            @if (form.controls.password.errors?.['required']) {
+              <span class="errors">Password wajib diisi.</span>
+            }
+            @if (form.controls.password.errors?.['minlength']) {
+              <span class="errors">Password minimal 6 karakter.</span>
+            }
+          }
+        </label>
+
+        <label>
+          Konfirmasi Password
+          <input formControlName="confirmPassword" type="password" />
+          @if (form.controls.confirmPassword.value) {
+            @if (form.errors?.['passwordMismatch']) {
+              <span class="errors">Password tidak cocok.</span>
+            } @else {
+              <span class="success">Password cocok.</span>
+            }
+          }
+        </label>
+
+        <label>
+          Alasan Bergabung
+          <textarea formControlName="reasonJoin" rows="5"></textarea>
+          @if (form.controls.reasonJoin.invalid && form.controls.reasonJoin.touched) {
+            <span class="errors">Alasan bergabung wajib diisi.</span>
+          }
+        </label>
+
+        <button type="submit">Submit</button>
+        <button type="reset" (click)="onReset()">Reset</button>
+      </div>
+    </div>
+  </form>
+
+  @if (submittedData()) {
+    <h3>Show Data</h3>
+    <pre class="payload">{{ submittedData() }}</pre>
+  }
+</section>

@@ -1,0 +1,27 @@
+<div class="field" [formGroup]="form()">
+  <label [attr.for]="question().key">
+    {{ question().label }}
+
+    @switch (question().controlType) {
+      @case ('textbox') {
+        <input
+          [id]="question().key"
+          [type]="textType"
+          [formControlName]="question().key"
+        />
+      }
+      @case ('dropdown') {
+        <select [id]="question().key" [formControlName]="question().key">
+          <option value="">-- Pilih --</option>
+          @for (opt of dropdownOptions; track opt.key) {
+            <option [value]="opt.key">{{ opt.value }}</option>
+          }
+        </select>
+      }
+    }
+
+    @if (isInvalid) {
+      <span class="errors">"{{ question().label }}" wajib diisi.</span>
+    }
+  </label>
+</div>
