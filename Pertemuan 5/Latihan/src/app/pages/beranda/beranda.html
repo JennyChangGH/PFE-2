@@ -1,0 +1,46 @@
+<section class="page">
+  <div class="welcome-card">
+    <h2>Selamat datang di Jenny's Laptop</h2>
+    <p>Berikut ringkasan performa toko kamu hari ini.</p>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of stats; track stat.label) {
+      <div class="stat-card">
+        <span class="stat-icon">
+          @switch (stat.icon) {
+            @case ('laptop') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4.5" width="16" height="10.5" rx="1.2" />
+                <path d="M2.5 19.5h19l-1.5-3h-16l-1.5 3Z" />
+              </svg>
+            }
+            @case ('cart') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9.5" cy="19.5" r="1.2" />
+                <circle cx="17.5" cy="19.5" r="1.2" />
+                <path d="M3 4h2.2l2 11.4h10.9L20 8H6" />
+              </svg>
+            }
+            @case ('money') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="6.5" width="18" height="11" rx="1.5" />
+                <circle cx="12" cy="12" r="2.5" />
+              </svg>
+            }
+          }
+        </span>
+        <div class="stat-body">
+          <p class="stat-value">
+            @if (stat.isCurrency) {
+              {{ stat.value | currency: 'IDR' : 'symbol-narrow' : '1.0-0' }}
+            } @else {
+              {{ stat.value }}
+            }
+          </p>
+          <p class="stat-label">{{ stat.label }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</section>

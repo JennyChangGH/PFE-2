@@ -1,0 +1,100 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4.5" width="16" height="10.5" rx="1.2" />
+          <path d="M2.5 19.5h19l-1.5-3h-16l-1.5 3Z" />
+        </svg>
+      </span>
+      <span class="brand-text">
+        Jenny's Laptop
+        <small>Laptop Store</small>
+      </span>
+    </div>
+
+    <nav class="menu">
+      <a class="menu-item" routerLink="beranda" routerLinkActive="is-active">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 10.5 12 4l8.5 6.5" />
+            <path d="M5.5 9.5V20h13V9.5" />
+            <path d="M9.5 20v-6h5v6" />
+          </svg>
+        </span>
+        Beranda
+      </a>
+
+      <a class="menu-item" routerLink="produk" routerLinkActive="is-active">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4.5" width="16" height="10.5" rx="1.2" />
+            <path d="M2.5 19.5h19l-1.5-3h-16l-1.5 3Z" />
+          </svg>
+        </span>
+        Produk
+      </a>
+
+      <a class="menu-item" routerLink="pesanan" routerLinkActive="is-active">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.5 3.5h11l1.5 2v15l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5-2 1.5v-15l1.5-2Z" />
+            <path d="M9 9h6M9 13h6" />
+          </svg>
+        </span>
+        Pesanan
+      </a>
+
+      <div class="menu-group">
+        <button
+          type="button"
+          class="menu-item menu-item--toggle"
+          [class.is-active]="isLaporanActive()"
+          (click)="toggleLaporan()"
+        >
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 20V11M11 20V4M17.5 20v-6.5" />
+              <path d="M4.5 20h13" />
+            </svg>
+          </span>
+          Laporan
+          <span class="chevron" [class.chevron--open]="laporanOpen()">⌄</span>
+        </button>
+
+        @if (laporanOpen()) {
+          <div class="submenu">
+            <button
+              type="button"
+              class="submenu-item"
+              [class.is-active]="laporanState.isSelected('harian')"
+              (click)="selectLaporan('harian')"
+            >
+              <span class="branch">A</span>
+              Harian
+            </button>
+            <button
+              type="button"
+              class="submenu-item"
+              [class.is-active]="laporanState.isSelected('bulanan')"
+              (click)="selectLaporan('bulanan')"
+            >
+              <span class="branch">B</span>
+              Bulanan
+            </button>
+          </div>
+        }
+      </div>
+    </nav>
+  </aside>
+
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <h1>Dashboard</h1>
+    </header>
+
+    <section class="dashboard-body">
+      <router-outlet />
+    </section>
+  </main>
+</div>

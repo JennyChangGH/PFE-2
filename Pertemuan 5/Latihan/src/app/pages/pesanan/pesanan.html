@@ -1,0 +1,28 @@
+<section class="page">
+  <div class="card table-card">
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>No. Pesanan</th>
+          <th>Produk</th>
+          <th>Pelanggan</th>
+          <th>Tanggal</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of orders; track order.id) {
+          <tr>
+            <td class="order-id">{{ order.id }}</td>
+            <td>{{ order.produk }}</td>
+            <td>{{ order.pelanggan }}</td>
+            <td>{{ order.tanggal | date: 'd MMM y' }}</td>
+            <td>
+              <span class="status-badge" [class]="statusClass(order.status)">{{ order.status }}</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
