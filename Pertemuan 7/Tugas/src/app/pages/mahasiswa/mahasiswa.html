@@ -1,0 +1,123 @@
+<header class="page-header">
+  <div>
+    <h1>Data Mahasiswa</h1>
+    <p>Kelola data mahasiswa melalui endpoint <code>/api/Pertemuan6</code></p>
+  </div>
+  <button type="button" class="btn btn-light" (click)="load()" [disabled]="loading()">
+    {{ loading() ? 'Memuat...' : 'Muat Ulang' }}
+  </button>
+</header>
+
+@if (message()) {
+  <div class="alert alert-success">{{ message() }}</div>
+}
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+<div class="crud-grid">
+  <form class="card" (ngSubmit)="save()" #f="ngForm">
+    <h2>{{ editId() === null ? 'Tambah Mahasiswa' : 'Edit Mahasiswa #' + editId() }}</h2>
+
+    <div class="form-field">
+      <label for="nama">Nama</label>
+      <input
+        id="nama"
+        name="nama"
+        [(ngModel)]="form.nama"
+        required
+        #nama="ngModel"
+        placeholder="Nama mahasiswa"
+      />
+      @if (nama.invalid && nama.touched) {
+        <span class="hint">Nama wajib diisi</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="alamat">Alamat</label>
+      <input id="alamat" name="alamat" [(ngModel)]="form.alamat" placeholder="Alamat" />
+    </div>
+
+    <div class="form-field">
+      <label for="pesanpesan">Pesan</label>
+      <textarea
+        id="pesanpesan"
+        name="pesanpesan"
+        [(ngModel)]="form.pesanpesan"
+        placeholder="Pesan-pesan"
+      ></textarea>
+    </div>
+
+    <div class="form-field">
+      <label for="dateTime">Tanggal &amp; Waktu</label>
+      <input id="dateTime" name="dateTime" type="datetime-local" [(ngModel)]="form.dateTime" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="saving() || f.invalid">
+        {{ saving() ? 'Menyimpan...' : editId() === null ? 'Simpan' : 'Update' }}
+      </button>
+      @if (editId() !== null) {
+        <button type="button" class="btn btn-light" (click)="resetForm()">Batal</button>
+      }
+    </div>
+  </form>
+
+  <section class="card">
+    <div class="table-toolbar">
+      <h2>Daftar Mahasiswa ({{ filtered().length }})</h2>
+      <input
+        class="search"
+        type="search"
+        placeholder="Cari nama, alamat, pesan..."
+        [value]="keyword()"
+        (input)="keyword.set($any($event.target).value)"
+      />
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Alamat</th>
+            <th>Pesan</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (m of filtered(); track m.id) {
+            <tr [class.is-editing]="editId() === m.id">
+              <td>{{ m.id }}</td>
+              <td>{{ m.nama }}</td>
+              <td>{{ m.alamat || '-' }}</td>
+              <td>{{ m.pesanpesan || '-' }}</td>
+              <td>
+                @if (m.dateTime) {
+                  {{ m.dateTime | date: 'dd MMM yyyy, HH:mm' }}
+                } @else {
+                  <span class="muted">-</span>
+                }
+              </td>
+              <td class="actions">
+                <button type="button" class="btn btn-sm btn-edit" (click)="edit(m)">Edit</button>
+                <button type="button" class="btn btn-sm btn-delete" (click)="remove(m)">
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty">
+                {{ loading() ? 'Memuat data...' : 'Belum ada data mahasiswa.' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

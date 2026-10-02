@@ -1,0 +1,147 @@
+<header class="page-header">
+  <div>
+    <h1>Data Telephone</h1>
+    <p>Kelola data telephone melalui endpoint <code>/api/Telephone</code></p>
+  </div>
+  <button type="button" class="btn btn-light" (click)="load()" [disabled]="loading()">
+    {{ loading() ? 'Memuat...' : 'Muat Ulang' }}
+  </button>
+</header>
+
+@if (message()) {
+  <div class="alert alert-success">{{ message() }}</div>
+}
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+<div class="crud-grid">
+  <form class="card" (ngSubmit)="save()" #f="ngForm">
+    <h2>{{ editId() === null ? 'Tambah Telephone' : 'Edit Telephone #' + editId() }}</h2>
+
+    <div class="form-field">
+      <label for="namaUser">Nama User</label>
+      <input
+        id="namaUser"
+        name="namaUser"
+        [(ngModel)]="form.namaUser"
+        required
+        #namaUser="ngModel"
+        placeholder="Nama user"
+      />
+      @if (namaUser.invalid && namaUser.touched) {
+        <span class="hint">Nama user wajib diisi</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="alamat">Alamat</label>
+      <input id="alamat" name="alamat" [(ngModel)]="form.alamat" placeholder="Alamat" />
+    </div>
+
+    <div class="form-field">
+      <label for="noTelp">No. Telp</label>
+      <input
+        id="noTelp"
+        name="noTelp"
+        type="tel"
+        [(ngModel)]="form.noTelp"
+        pattern="[0-9+\- ]*"
+        #noTelp="ngModel"
+        placeholder="08xxxxxxxxxx"
+      />
+      @if (noTelp.invalid && noTelp.touched) {
+        <span class="hint">No. telp hanya boleh berisi angka, +, - atau spasi</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="kodePost">Kode Pos</label>
+      <input
+        id="kodePost"
+        name="kodePost"
+        [(ngModel)]="form.kodePost"
+        pattern="[0-9]*"
+        maxlength="5"
+        #kodePost="ngModel"
+        placeholder="29444"
+      />
+      @if (kodePost.invalid && kodePost.touched) {
+        <span class="hint">Kode pos hanya boleh berisi angka</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="dateTime">Tanggal &amp; Waktu</label>
+      <input id="dateTime" name="dateTime" type="datetime-local" [(ngModel)]="form.dateTime" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="saving() || f.invalid">
+        {{ saving() ? 'Menyimpan...' : editId() === null ? 'Simpan' : 'Update' }}
+      </button>
+      @if (editId() !== null) {
+        <button type="button" class="btn btn-light" (click)="resetForm()">Batal</button>
+      }
+    </div>
+  </form>
+
+  <section class="card">
+    <div class="table-toolbar">
+      <h2>Daftar Telephone ({{ filtered().length }})</h2>
+      <input
+        class="search"
+        type="search"
+        placeholder="Cari nama, alamat, no. telp..."
+        [value]="keyword()"
+        (input)="keyword.set($any($event.target).value)"
+      />
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama User</th>
+            <th>Alamat</th>
+            <th>No. Telp</th>
+            <th>Kode Pos</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of filtered(); track t.id) {
+            <tr [class.is-editing]="editId() === t.id">
+              <td>{{ t.id }}</td>
+              <td>{{ t.namaUser }}</td>
+              <td>{{ t.alamat || '-' }}</td>
+              <td>{{ t.noTelp || '-' }}</td>
+              <td>{{ t.kodePost || '-' }}</td>
+              <td>
+                @if (t.dateTime) {
+                  {{ t.dateTime | date: 'dd MMM yyyy, HH:mm' }}
+                } @else {
+                  <span class="muted">-</span>
+                }
+              </td>
+              <td class="actions">
+                <button type="button" class="btn btn-sm btn-edit" (click)="edit(t)">Edit</button>
+                <button type="button" class="btn btn-sm btn-delete" (click)="remove(t)">
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="empty">
+                {{ loading() ? 'Memuat data...' : 'Belum ada data telephone.' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

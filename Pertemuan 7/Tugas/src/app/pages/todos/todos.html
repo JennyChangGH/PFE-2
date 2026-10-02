@@ -1,0 +1,90 @@
+<header class="page-header">
+  <div>
+    <h1>Data Todos</h1>
+    <p>Data dari <code>https://jsonplaceholder.typicode.com/todos</code></p>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary" (click)="tampilkan()" [disabled]="loading()">
+      {{ loading() ? 'Memuat...' : loaded() ? 'Muat Ulang Data' : 'Tampilkan Data' }}
+    </button>
+    @if (loaded()) {
+      <button type="button" class="btn btn-light" (click)="sembunyikan()">Sembunyikan</button>
+    }
+  </div>
+</header>
+
+@if (error()) {
+  <div class="alert alert-error">{{ error() }}</div>
+}
+
+@if (loaded()) {
+  <div class="stats">
+    <div class="card stat">
+      <span>Total</span>
+      <strong>{{ items().length }}</strong>
+    </div>
+    <div class="card stat">
+      <span>Selesai</span>
+      <strong class="text-done">{{ totalSelesai() }}</strong>
+    </div>
+    <div class="card stat">
+      <span>Belum Selesai</span>
+      <strong class="text-pending">{{ items().length - totalSelesai() }}</strong>
+    </div>
+  </div>
+
+  <section class="card">
+    <div class="table-toolbar">
+      <h2>Daftar Todos ({{ filtered().length }})</h2>
+      <div class="filters">
+        <select class="search" [value]="status()" (change)="status.set($any($event.target).value)">
+          <option value="semua">Semua status</option>
+          <option value="selesai">Selesai</option>
+          <option value="belum">Belum selesai</option>
+        </select>
+        <input
+          class="search"
+          type="search"
+          placeholder="Cari judul..."
+          [value]="keyword()"
+          (input)="keyword.set($any($event.target).value)"
+        />
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Judul</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of filtered(); track t.id) {
+            <tr>
+              <td>{{ t.id }}</td>
+              <td>{{ t.userId }}</td>
+              <td>{{ t.title }}</td>
+              <td>
+                <span class="badge" [class.badge-done]="t.completed">
+                  {{ t.completed ? 'Selesai' : 'Belum' }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" class="empty">Tidak ada todo yang cocok.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+} @else if (!loading()) {
+  <section class="card empty">
+    Klik tombol <strong>Tampilkan Data</strong> untuk memuat daftar todos.
+  </section>
+}
