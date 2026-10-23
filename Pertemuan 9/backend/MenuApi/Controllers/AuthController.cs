@@ -1,6 +1,7 @@
 using MenuApi.Data;
 using MenuApi.Models;
 using MenuApi.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace MenuApi.Controllers;
 public class AuthController(AppDbContext db, TokenService tokens) : ControllerBase
 {
     [HttpPost("login")]
+    [AllowAnonymous]
     public async Task<ActionResult<LoginResponse>> Login(LoginRequest req)
     {
         var user = await db.Users.FirstOrDefaultAsync(u => u.Username == req.Username && u.IsActive);
